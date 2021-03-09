@@ -7,6 +7,5 @@ import (
 )
 
 func main() {
-	cmdline := commandline.Get()
-	fmt.Printf("%v\n", cmdline)
+	fmt.Println(commandline.Get())
 }
