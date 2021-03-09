@@ -4,8 +4,8 @@ go-windows-commandline
 This package gets the raw command-line as is.
 
 ```go
-$ cd example
-$ type main.go
+[C:] cd example
+[C:] type main.go
 package main
 
 import (
@@ -19,8 +19,10 @@ func main() {
     fmt.Printf("%v\n", cmdline)
 }
 
-$ go build
-$ example.exe "1  2" "3  4" "5  6"
+[C:] go build
+[C:] example.exe "1  2" "3  4" "5  6"
 example.exe "1  2" "3  4" "5  6"
 $
 ```
+
+Not on Windows-OS, this package emulates the behavior on Windows.
