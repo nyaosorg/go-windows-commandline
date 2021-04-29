@@ -13,8 +13,6 @@ func SplitArgs(line string) (raw []string, cooked []string) {
 	quote := false
 	backslash := false
 
-	line = strings.TrimPrefix(line, " ")
-
 	for _, r := range line {
 		if backslash {
 			backslash = false
@@ -31,8 +29,10 @@ func SplitArgs(line string) (raw []string, cooked []string) {
 				raw1.WriteByte('\\')
 				continue
 			} else if !quote && unicode.IsSpace(r) {
-				raw = append(raw, raw1.String())
-				cooked = append(cooked, cooked1.String())
+				if raw1.Len() > 0 {
+					raw = append(raw, raw1.String())
+					cooked = append(cooked, cooked1.String())
+				}
 				raw1.Reset()
 				cooked1.Reset()
 				continue
