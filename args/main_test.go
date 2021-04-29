@@ -1,6 +1,9 @@
 package args
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func test(source string, expectRaw, expectCooked []string) (bool, []string, []string) {
 	resultRaw, resultCooked := SplitArgs(source)
@@ -52,13 +55,25 @@ func TestSplitArgs(t *testing.T) {
 			expectRaw:    []string{`ahaha`, `\"C:\\Program\ Files\\" a`},
 			expectCooked: []string{`ahaha`, `"C:\Program Files\ a`},
 		},
+		{
+			source:       `-c "ls -a "C:\Program Files""`,
+			expectRaw:    []string{`-c`, `"ls -a "C:\Program`, `Files""`},
+			expectCooked: []string{`-c`, `ls -a C:\Program`, `Files`},
+		},
+		{
+			source:       ` -c ahaha`,
+			expectRaw:    []string{`-c`, `ahaha`},
+			expectCooked: []string{`-c`, `ahaha`},
+		},
 	}
 	for _, case1 := range testcases {
 		if ok, resultRaw, resultCooked := test(case1.source, case1.expectRaw, case1.expectCooked); !ok {
-			t.Fatalf("  splitArgs(`%v`)\n!= %v,%v\n(result=%v,%v)",
+			t.Fatalf("  splitArgs(`%s`)\n!= `%s`/`%s`\n(result=`%s`/`%s`)",
 				case1.source,
-				case1.expectRaw, case1.expectCooked,
-				resultRaw, resultCooked)
+				strings.Join(case1.expectRaw, "`,`"),
+				strings.Join(case1.expectCooked, "`,`"),
+				strings.Join(resultRaw, "`,`"),
+				strings.Join(resultCooked, "`,`"))
 		}
 	}
 }

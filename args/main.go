@@ -13,6 +13,8 @@ func SplitArgs(line string) (raw []string, cooked []string) {
 	quote := false
 	backslash := false
 
+	line = strings.TrimPrefix(line, " ")
+
 	for _, r := range line {
 		if backslash {
 			backslash = false
