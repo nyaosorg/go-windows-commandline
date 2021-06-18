@@ -47,13 +47,13 @@ func TestSplitArgs(t *testing.T) {
 		},
 		{
 			source:       `ahaha C:\Program\ Files`,
-			expectRaw:    []string{`ahaha`, `C:\Program\ Files`},
-			expectCooked: []string{`ahaha`, `C:\Program Files`},
+			expectRaw:    []string{`ahaha`, `C:\Program\`, `Files`},
+			expectCooked: []string{`ahaha`, `C:\Program\`, `Files`},
 		},
 		{
 			source:       `ahaha \"C:\\Program\ Files\\" a`,
-			expectRaw:    []string{`ahaha`, `\"C:\\Program\ Files\\" a`},
-			expectCooked: []string{`ahaha`, `"C:\Program Files\ a`},
+			expectRaw:    []string{`ahaha`, `\"C:\\Program\`, `Files\\" a`},
+			expectCooked: []string{`ahaha`, `"C:\\Program\`, `Files\\ a`},
 		},
 		{
 			source:       `-c "ls -a "C:\Program Files""`,
@@ -64,6 +64,16 @@ func TestSplitArgs(t *testing.T) {
 			source:       ` -c ahaha`,
 			expectRaw:    []string{`-c`, `ahaha`},
 			expectCooked: []string{`-c`, `ahaha`},
+		},
+		{
+			source:       ` --netuse S:=\\foo\bar\gar`,
+			expectRaw:    []string{`--netuse`, `S:=\\foo\bar\gar`},
+			expectCooked: []string{`--netuse`, `S:=\\foo\bar\gar`},
+		},
+		{
+			source:       ` --netuse "S:=\\foo\bar\gar"`,
+			expectRaw:    []string{`--netuse`, `"S:=\\foo\bar\gar"`},
+			expectCooked: []string{`--netuse`, `S:=\\foo\bar\gar`},
 		},
 	}
 	for _, case1 := range testcases {
