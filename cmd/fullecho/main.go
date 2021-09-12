@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/zetamatta/go-windows-commandline"
+	"github.com/nyaosorg/go-windows-commandline"
 )
 
 func main() {

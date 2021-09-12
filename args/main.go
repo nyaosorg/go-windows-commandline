@@ -4,7 +4,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/zetamatta/go-windows-commandline"
+	"github.com/nyaosorg/go-windows-commandline"
 )
 
 func SplitArgs(line string) (raw []string, cooked []string) {

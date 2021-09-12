@@ -1,4 +1,4 @@
-module github.com/zetamatta/go-windows-commandline
+module github.com/nyaosorg/go-windows-commandline
 
 go 1.16
 
