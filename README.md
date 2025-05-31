@@ -1,6 +1,8 @@
 go-windows-commandline
 ======================
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/nyaosorg/go-windows-commandline.svg)](https://pkg.go.dev/github.com/nyaosorg/go-windows-commandline)
+
 This Go package provides access to the **raw command-line string** as passed to a process on **Windows**, *before* it is split into `os.Args`.
 
 Why?
